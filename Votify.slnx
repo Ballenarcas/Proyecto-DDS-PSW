@@ -1,7 +1,5 @@
 <Solution>
   <Folder Name="/Votify/">
-    <Project Path="Votify/Votify.Presentation.csproj" />
+    <Project Path="Votify/Votify.Presentation/Votify.Presentation.csproj" />
   </Folder>
-  <Project Path="Votify.Logic/Votify.Logic.csproj" />
-  <Project Path="Votify.Persistence/Votify.Persistence.csproj" />
 </Solution>
