@@ -2,4 +2,5 @@
   <Folder Name="/Votify/">
     <Project Path="Votify/Votify.Presentation/Votify.csproj" />
   </Folder>
+  <Project Path="prueba1/prueba1.csproj" />
 </Solution>
