@@ -1,5 +1,5 @@
 <Solution>
   <Folder Name="/Votify/">
-    <Project Path="Votify/Votify.Presentation/Votify.Presentation.csproj" />
+    <Project Path="Votify/Votify.Presentation/Votify.csproj" />
   </Folder>
 </Solution>
