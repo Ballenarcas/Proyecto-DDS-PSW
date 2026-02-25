@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Votify.Application\Votify.Application.csproj" />
+    <ProjectReference Include="..\Votify.Infraestructure\Votify.Infraestructure.csproj" />
+  </ItemGroup>
+
 </Project>
