@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Entities\" />
     <Folder Include="Factory\" />
-    <Folder Include="Vote\" />
+    <Folder Include="Votes\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,22 @@
+using DotNetEnv;
+using Votify.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+
+Env.Load();
 var builder = WebApplication.CreateBuilder(args);
+
+
+var host = Environment.GetEnvironmentVariable("DB_HOST");
+var db = Environment.GetEnvironmentVariable("DB_NAME");
+var user = Environment.GetEnvironmentVariable("DB_USER");
+var pass = Environment.GetEnvironmentVariable("DB_PASSWORD");
+var port = Environment.GetEnvironmentVariable("DB_PORT");
+
+
+var connectionString = $"Host={host};Port={port};Database={db};Username={user};Password={pass};SslMode=Require;Trust Server Certificate=true;";
+
+builder.Services.AddDbContext<VotifyDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
