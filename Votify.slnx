@@ -1,8 +1,0 @@
-<Solution>
-  <Folder Name="/Votify/" />
-  <Project Path="Votify.API/Votify.API.csproj" />
-  <Project Path="Votify.Application/Votify.Application.csproj" />
-  <Project Path="Votify.Client/Votify.Client.csproj" />
-  <Project Path="Votify.Domain/Votify.Domain.csproj" />
-  <Project Path="Votify.Infraestructure/Votify.Infraestructure.csproj" />
-</Solution>

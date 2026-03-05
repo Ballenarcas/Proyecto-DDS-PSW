@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11505.172 d18.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Votify.API", "Votify.API\Votify.API.csproj", "{39C8BD6C-7CA0-1498-8673-111B1BBD1A4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Votify.Application", "Votify.Application\Votify.Application.csproj", "{59A21938-89CC-EAC2-820F-4C57519C30F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Votify.Client", "Votify.Client\Votify.Client.csproj", "{3A525678-C48B-5408-FEED-DD086E68744C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Votify.Domain", "Votify.Domain\Votify.Domain.csproj", "{A2FB33E9-E601-2B0C-6A90-76B12F6CF5B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Votify.Infraestructure", "Votify.Infraestructure\Votify.Infraestructure.csproj", "{FFDF0664-CACA-D2D5-C9FB-C0F3E1034402}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Votify", "Votify", "{22C51D25-BA21-32A3-8E36-A84928BAC71F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39C8BD6C-7CA0-1498-8673-111B1BBD1A4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C8BD6C-7CA0-1498-8673-111B1BBD1A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C8BD6C-7CA0-1498-8673-111B1BBD1A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C8BD6C-7CA0-1498-8673-111B1BBD1A4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59A21938-89CC-EAC2-820F-4C57519C30F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59A21938-89CC-EAC2-820F-4C57519C30F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59A21938-89CC-EAC2-820F-4C57519C30F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59A21938-89CC-EAC2-820F-4C57519C30F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A525678-C48B-5408-FEED-DD086E68744C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A525678-C48B-5408-FEED-DD086E68744C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A525678-C48B-5408-FEED-DD086E68744C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A525678-C48B-5408-FEED-DD086E68744C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2FB33E9-E601-2B0C-6A90-76B12F6CF5B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2FB33E9-E601-2B0C-6A90-76B12F6CF5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2FB33E9-E601-2B0C-6A90-76B12F6CF5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2FB33E9-E601-2B0C-6A90-76B12F6CF5B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFDF0664-CACA-D2D5-C9FB-C0F3E1034402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFDF0664-CACA-D2D5-C9FB-C0F3E1034402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFDF0664-CACA-D2D5-C9FB-C0F3E1034402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFDF0664-CACA-D2D5-C9FB-C0F3E1034402}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
