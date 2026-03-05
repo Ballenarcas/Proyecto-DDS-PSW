@@ -2,7 +2,23 @@ using DotNetEnv;
 using Votify.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-Env.Load();
+// Walk up from current directory OR base directory to find .env (works for both runtime and dotnet ef)
+static string? FindEnvFile()
+{
+    foreach (var startDir in new[] { Directory.GetCurrentDirectory(), AppContext.BaseDirectory })
+    {
+        var dir = startDir;
+        while (dir != null)
+        {
+            var candidate = Path.Combine(dir, ".env");
+            if (File.Exists(candidate)) return candidate;
+            dir = Directory.GetParent(dir)?.FullName;
+        }
+    }
+    return null;
+}
+var envFile = FindEnvFile();
+if (envFile != null) Env.Load(envFile);
 var builder = WebApplication.CreateBuilder(args);
 
 
