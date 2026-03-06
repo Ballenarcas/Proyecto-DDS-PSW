@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Votify.Domain.Entities;
 
 namespace Votify.Infrastructure.Persistence
 {
@@ -9,7 +10,8 @@ namespace Votify.Infrastructure.Persistence
         {
         }
 
-        // DbContext vacío por ahora
-        // Añadirás DbSet<> cuando el PO te diga qué entidades crear
+        public DbSet<Votacion> Votaciones { get; set; }
+        public DbSet<Voto> Votos { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
     }
 }
