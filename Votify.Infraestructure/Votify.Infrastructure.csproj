@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Votify.Domain\Votify.Domain.csproj" />
+    <ProjectReference Include="..\Votify.Application\Votify.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,8 +12,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.0" PrivateAssets="all" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Components\" />
+  <ItemGroup>    <ProjectReference Include="..\Votify.Application\Votify.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>    <Folder Include="Components\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

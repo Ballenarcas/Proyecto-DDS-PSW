@@ -1,0 +1,87 @@
+@page "/crear-votacion"
+@using Votify.Application.DTOs
+@inject VotacionesService VotacionesService
+
+<h2 class="title">Configuración de la nueva votación</h2>
+
+<p class="subtitle">Define los parámetros para el nuevo proceso de votación.</p>
+
+<div class="form-container">
+
+    <div class="form-group">
+        <label>Título de la votación</label>
+        <input class="form-control" @bind="Nombre" placeholder="Ej: Votación Final" />
+    </div>
+
+    <div class="form-group">
+        <label>Tipo de votación</label>
+        <select class="form-control" @bind="Tipo">
+            <option value="ESTANDAR">Recuento de votos</option>
+            <option value="ANONIMA">Votación anónima</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Inicio del período</label>
+        <input type="datetime-local" class="form-control" @bind="FechaInicio" />
+    </div>
+
+    <div class="form-group">
+        <label>Fin del período</label>
+        <input type="datetime-local" class="form-control" @bind="FechaFin" />
+    </div>
+
+    <h4 class="section-title">Opciones adicionales</h4>
+
+    <div class="form-group checkbox-group">
+        <input type="checkbox" @bind="PermiteComentarios" />
+        <label>Permitir comentarios de feedback</label>
+    </div>
+
+    <div class="form-group">
+        <label>Límite de proyectos por votar</label>
+        <input type="number" class="form-control" @bind="LimiteProyectos" min="1" />
+    </div>
+
+    <button class="btn btn-primary" @onclick="HandleCrearVotacion">Crear Votación</button>
+
+    @if (Mensaje != null)
+    {
+        <p class="mensaje">@Mensaje</p>
+    }
+</div>
+
+@code {
+    string Nombre = "";
+    string Tipo = "ESTANDAR";
+    DateTime FechaInicio = DateTime.Now;
+    DateTime FechaFin = DateTime.Now.AddDays(1);
+    int LimiteProyectos = 1;
+    bool PermiteComentarios = true;
+
+    string? Mensaje;
+
+    async Task HandleCrearVotacion()
+    {
+        CrearVotacionDto? request = new CrearVotacionDto
+        {
+            Id = Guid.NewGuid().ToString(),
+            Nombre = Nombre,
+            Tipo = Tipo,
+            FechaInicio = FechaInicio,
+            FechaFin = FechaFin,
+            LimiteProyectos = LimiteProyectos,
+            PermiteComentarios = PermiteComentarios
+        };
+
+        try
+        {
+            await VotacionesService.CrearVotacion(request);
+            Mensaje = "Votación creada correctamente.";
+        }
+        catch
+        {
+            Mensaje = "Error al crear la votación.";
+        }
+    }
+}
