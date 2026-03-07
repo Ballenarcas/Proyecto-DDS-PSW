@@ -30,6 +30,7 @@ namespace Votify.Infrastructure.Persistence
             var db = Environment.GetEnvironmentVariable("DB_NAME");
             var user = Environment.GetEnvironmentVariable("DB_USER");
             var pass = Environment.GetEnvironmentVariable("DB_PASSWORD");
+            
 
             var connectionString =
                 $"Host={host};Port={port};Database={db};Username={user};Password={pass}";

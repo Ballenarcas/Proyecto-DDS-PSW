@@ -17,11 +17,10 @@ namespace Votify.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CrearVotacion([FromBody] CrearVotacionRequest request)
+        public async Task<IActionResult> CrearVotacionn([FromBody] CrearVotacionRequest request)
         {
             var dto = new CrearVotacionDto
             {
-                Id = request.Id,
                 Nombre = request.Nombre,
                 Tipo = request.Tipo,
                 FechaInicio = request.FechaInicio,
@@ -30,11 +29,10 @@ namespace Votify.API.Controllers
                 PermiteComentarios = request.PermiteComentarios
             };
 
-            _service.CrearVotacionAsync(dto);
+            await _service.CrearVotacionAsync(dto);
 
             return Ok(new
             {
-                dto.Id,
                 dto.Nombre,
                 dto.Tipo,
                 dto.FechaInicio,

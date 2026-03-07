@@ -8,7 +8,7 @@ using Votify.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace Votify.Infraestructure.Migrations
+namespace Votify.Infrastructure.Migrations
 {
     [DbContext(typeof(VotifyDbContext))]
     partial class VotifyDbContextModelSnapshot : ModelSnapshot
@@ -25,35 +25,38 @@ namespace Votify.Infraestructure.Migrations
             modelBuilder.Entity("Votify.Infrastructure.Persistence.Entities.VotacionEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Categoria")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("FechaFin")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("fecha_fin");
 
                     b.Property<DateTime>("FechaInicio")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("fecha_inicio");
 
                     b.Property<int>("LimiteProyectos")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("limite_proy");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("nombre");
 
                     b.Property<bool>("PermiteComentarios")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("comentarios");
 
                     b.Property<string>("Tipo")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("tipo");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Votaciones", (string)null);
+                    b.ToTable("votacion", (string)null);
                 });
 #pragma warning restore 612, 618
         }

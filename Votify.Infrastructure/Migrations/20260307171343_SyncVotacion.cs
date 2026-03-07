@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Votify.Infraestructure.Migrations
+namespace Votify.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class SyncVotacion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

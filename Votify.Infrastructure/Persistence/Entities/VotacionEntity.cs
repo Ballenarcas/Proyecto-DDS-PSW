@@ -1,14 +1,30 @@
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Votify.Infrastructure.Persistence.Entities
 {
-    public class VotacionEntity
-    {
-        public string Id { get; set; } = default!;
-        public string Nombre { get; set; } = default!;
-        public string Tipo { get; set; } = default!;
-        public string Categoria { get; set; } = null!;
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
-        public int LimiteProyectos { get; set; }
-        public bool PermiteComentarios { get; set; }
-    }
+[Table("votacion")] 
+public class VotacionEntity
+{
+    [Column("id")]
+    public Guid Id { get; set; } 
+
+    [Column("nombre")]
+    public string Nombre { get; set; }
+
+    [Column("tipo")]
+    public string Tipo { get; set; }
+
+    [Column("fecha_inicio")]
+    public DateTime FechaInicio { get; set; }
+
+    [Column("fecha_fin")]
+    public DateTime FechaFin { get; set; }
+
+    [Column("limite_proy")]
+    public int LimiteProyectos { get; set; }
+
+    [Column("comentarios")]
+    public bool PermiteComentarios { get; set; }
+}
 }

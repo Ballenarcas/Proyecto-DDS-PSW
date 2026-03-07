@@ -2,7 +2,6 @@ namespace Votify.API.DTOs
 {
     public class CrearVotacionRequest
     {
-        public string Id { get; set; } = default!;
         public string Nombre { get; set; } = default!;
         public string Tipo { get; set; } = default!;
         public DateTime FechaInicio { get; set; }

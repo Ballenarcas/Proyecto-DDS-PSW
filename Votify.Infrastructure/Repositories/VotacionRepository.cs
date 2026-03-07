@@ -18,17 +18,19 @@ namespace Votify.Infrastructure.Repositories
         {
             var entity = new VotacionEntity
             {
-                Id = votacion.Id,
                 Nombre = votacion.Nombre,
                 Tipo = votacion.Tipo(),
-                FechaInicio = votacion.FechaInicio,
-                FechaFin = votacion.FechaFin,
+                FechaInicio = votacion.FechaInicio.ToUniversalTime(),
+                FechaFin = votacion.FechaFin.ToUniversalTime(),
                 LimiteProyectos = votacion.LimiteProyectos,
                 PermiteComentarios = votacion.PermiteComentarios
             };
+            Console.WriteLine("Añadiendo votacion...");
 
-            _db.Votaciones.Add(entity);
+            await _db.Votaciones.AddAsync(entity);
+            Console.WriteLine("Guardando en DB...");
             await _db.SaveChangesAsync();
-        }
+            Console.WriteLine("Guardado!");
+        }   
     }
 }

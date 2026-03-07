@@ -4,9 +4,7 @@ namespace Votify.Application.DTOs;
 
 public class CrearVotacionDto
 {
-    public string? Id { get; set; }
-
-
+    
     public required string Nombre { get; set; }
 
     public required string Tipo { get; set; }

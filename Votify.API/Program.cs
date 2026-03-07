@@ -32,13 +32,21 @@ var user = Environment.GetEnvironmentVariable("DB_USER");
 var pass = Environment.GetEnvironmentVariable("DB_PASSWORD");
 var port = Environment.GetEnvironmentVariable("DB_PORT");
 
-var connectionString =
-    $"Host={host};Port={port};Database={db};Username={user};Password={pass};SslMode=Require;Trust Server Certificate=true;";
+var connectionString = 
+    $"Host={host};Port={port};Database={db};Username={user};Password={pass};SslMode=Require";
+
 
 builder.Services.AddDbContext<VotifyDbContext>(options =>
-    options.UseNpgsql(connectionString));
+{
+    options.UseNpgsql(connectionString, o =>
+        o.EnableRetryOnFailure());
+        options.EnableSensitiveDataLogging();
+    options.LogTo(Console.WriteLine);    
+        
+    });
 
 builder.Services.AddScoped<IVotacionService, VotacionService>();
+Console.WriteLine($"DB => {host}:{port}/{db} USER => {user}");
 
 builder.Services.AddControllers();
 

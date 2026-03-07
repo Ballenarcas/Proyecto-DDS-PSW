@@ -24,14 +24,13 @@ namespace Votify.Application.Services
             };
 
             var votacion = factory.Crear(
-                dto.Id,
                 dto.Nombre,
                 dto.FechaInicio,
                 dto.FechaFin,
                 dto.LimiteProyectos,
                 dto.PermiteComentarios
             );
-
+            
             await _repo.GuardarAsync(votacion);
         }
     }
