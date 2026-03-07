@@ -1,5 +1,6 @@
 @page "/crear-votacion"
-@using Votify.Application.DTOs
+@using Votify.Client.DTOs
+
 @inject VotacionesService VotacionesService
 
 <h2 class="title">Configuración de la nueva votación</h2>
@@ -63,7 +64,7 @@
 
     async Task HandleCrearVotacion()
     {
-        CrearVotacionDto? request = new CrearVotacionDto
+        CrearVotacionRequest?  request = new CrearVotacionRequest
         {
             Id = Guid.NewGuid().ToString(),
             Nombre = Nombre,

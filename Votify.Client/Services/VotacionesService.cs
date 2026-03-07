@@ -1,43 +1,25 @@
 using System.Net.Http.Json;
-using Votify.Application.DTOs;
+using Votify.Client.DTOs;
 
 namespace Votify.Client.Services
 {
     public class VotacionesService
     {
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient _http;
 
-        public VotacionesService(HttpClient httpClient)
+        public VotacionesService(HttpClient http)
         {
-            _httpClient = httpClient;
+            _http = http;
         }
 
-        public async Task CrearVotacion(CrearVotacionDto dto)
+        public async Task CrearVotacion(CrearVotacionRequest request)
         {
-            try
-            {
-                // var response = await _httpClient.PostAsJsonAsync("api/votaciones", dto);
-                // response.EnsureSuccessStatusCode();
-                Console.WriteLine("Votación creada (temporalmente sin API)");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-        }
+            var response = await _http.PostAsJsonAsync("api/votaciones", request);
 
-        public async Task<List<VotacionDto>> ObtenerVotaciones()
-        {
-            try
+            if (!response.IsSuccessStatusCode)
             {
-                // var response = await _httpClient.GetAsync("api/votaciones");
-                // return await response.Content.ReadAsAsync<List<VotacionDto>>();
-                return new List<VotacionDto>();  // Retorna una lista vacía temporalmente
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                return new List<VotacionDto>();
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Error al crear la votación: {error}");
             }
         }
     }

@@ -10,7 +10,7 @@ builder.Services.AddScoped<VotacionesService>();
 
 builder.Services.AddScoped(sp => new HttpClient 
 { 
-    BaseAddress = new Uri("https://localhost:5000/") 
+    BaseAddress = new Uri("http://localhost:5154/") 
 });
 
 await builder.Build().RunAsync();

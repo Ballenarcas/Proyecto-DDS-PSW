@@ -1,9 +1,9 @@
 using Votify.Application.DTOs;
 
-namespace Votify.Application.Interface;
-
-public interface IVotacionService
+namespace Votify.Application.Interface
 {
-    void CrearVotacion(CrearVotacionDto dto);
-    List<VotacionDto> ObtenerVotaciones();
+    public interface IVotacionService
+    {
+        void CrearVotacion(CrearVotacionDto dto);
+    }
 }
