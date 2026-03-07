@@ -1,13 +1,20 @@
 using Votify.Application.DTOs;
 using Votify.Application.Interface;
 using Votify.Domain.Factory;
+using Votify.Infrastructure.Repositories;
 
 namespace Votify.Application.Services
 {
     public class VotacionService : IVotacionService
     {
+        private readonly VotacionRepository _repo;
 
-        public void CrearVotacion(CrearVotacionDto dto)
+        public VotacionService(VotacionRepository repo)
+        {
+            _repo = repo;
+        }
+
+        public async Task CrearVotacionAsync(CrearVotacionDto dto)
         {
             VotacionFactory factory = dto.Tipo.ToUpper() switch
             {
@@ -24,7 +31,8 @@ namespace Votify.Application.Services
                 dto.LimiteProyectos,
                 dto.PermiteComentarios
             );
-            _ = votacion;
+
+            await _repo.GuardarAsync(votacion);
         }
     }
 }

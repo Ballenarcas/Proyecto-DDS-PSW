@@ -6,17 +6,16 @@ public class CrearVotacionDto
 {
     public string? Id { get; set; }
 
-    [Required]
-    public string Nombre { get; set; }
 
-    [Required]
-    public string Tipo { get; set; }
+    public required string Nombre { get; set; }
 
-    public DateTime FechaInicio { get; set; }
+    public required string Tipo { get; set; }
 
-    public DateTime FechaFin { get; set; }
+    public required DateTime FechaInicio { get; set; }
 
-    public int LimiteProyectos { get; set; }
+    public required DateTime FechaFin { get; set; }
+
+    public required int LimiteProyectos { get; set; }
 
     public bool PermiteComentarios { get; set; }
 }

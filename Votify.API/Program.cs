@@ -3,6 +3,7 @@ using Votify.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Votify.Application.Interface;
 using Votify.Application.Services;
+using Votify.Infrastructure.Repositories;
 
 static string? FindEnvFile()
 {
@@ -18,6 +19,7 @@ static string? FindEnvFile()
     }
     return null;
 }
+
 
 var envFile = FindEnvFile();
 if (envFile != null) Env.Load(envFile);
@@ -50,6 +52,7 @@ builder.Services.AddCors(options =>
                   .AllowAnyHeader();
         });
 });
+builder.Services.AddScoped<VotacionRepository>();
 
 var app = builder.Build();
 

@@ -30,7 +30,7 @@ namespace Votify.API.Controllers
                 PermiteComentarios = request.PermiteComentarios
             };
 
-            _service.CrearVotacion(dto);
+            _service.CrearVotacionAsync(dto);
 
             return Ok(new
             {

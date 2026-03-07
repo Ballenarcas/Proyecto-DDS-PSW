@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Votify.Client", "Votify.Cli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Votify.Domain", "Votify.Domain\Votify.Domain.csproj", "{A2FB33E9-E601-2B0C-6A90-76B12F6CF5B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Votify.Infrastructure", "Votify.Infraestructure\Votify.Infrastructure.csproj", "{769B2096-B7FC-83AD-7BAB-C61F79ED3D9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Votify.Infrastructure", "Votify.Infrastructure\Votify.Infrastructure.csproj", "{769B2096-B7FC-83AD-7BAB-C61F79ED3D9B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Votify", "Votify", "{22C51D25-BA21-32A3-8E36-A84928BAC71F}"
 EndProject
