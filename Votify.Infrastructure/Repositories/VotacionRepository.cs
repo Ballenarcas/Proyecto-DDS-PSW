@@ -32,5 +32,9 @@ namespace Votify.Infrastructure.Repositories
             await _db.SaveChangesAsync();
             Console.WriteLine("Guardado!");
         }   
+        public async Task<List<VotacionEntity>> ObtenerTodasAsync()
+        {
+            return await _db.Votaciones.ToListAsync();
+        }
     }
 }

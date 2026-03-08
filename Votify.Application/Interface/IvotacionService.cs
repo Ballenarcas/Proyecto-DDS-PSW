@@ -5,5 +5,6 @@ namespace Votify.Application.Interface
     public interface IVotacionService
     {
         Task CrearVotacionAsync(CrearVotacionDto dto);
+        Task<List<CrearVotacionResponse>> ObtenerTodasAsync();
     }
 }

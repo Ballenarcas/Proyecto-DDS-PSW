@@ -33,5 +33,19 @@ namespace Votify.Application.Services
             
             await _repo.GuardarAsync(votacion);
         }
+        public async Task<List<CrearVotacionResponse>> ObtenerTodasAsync()
+        {
+            var entidades = await _repo.ObtenerTodasAsync();
+
+            // Mapeamos de la base de datos al DTO que verá el cliente
+            return entidades.Select(e => new CrearVotacionResponse
+            {
+                Id = e.Id.ToString(), 
+                Nombre = e.Nombre,
+                Tipo = e.Tipo,
+                FechaInicio = e.FechaInicio,
+                FechaFin = e.FechaFin
+            }).ToList();
+        }
     }
 }

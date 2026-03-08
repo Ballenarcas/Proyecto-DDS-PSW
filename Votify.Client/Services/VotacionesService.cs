@@ -22,5 +22,10 @@ namespace Votify.Client.Services
                 throw new Exception($"Error al crear la votación: {error}");
             }
         }
+        public async Task<List<CrearVotacionResponse>> ObtenerVotaciones()
+        {
+            return await _http.GetFromJsonAsync<List<CrearVotacionResponse>>("api/votaciones") 
+                ?? new List<CrearVotacionResponse>();
+        }
     }
 }

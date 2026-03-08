@@ -1,10 +1,11 @@
-@page "/"
+@page "/nueva-votacion"
 @using Votify.Client.DTOs
 @inject VotacionesService VotacionesService
+@inject NavigationManager Nav
 
 <div class="main-container">
     <div class="top-nav">
-        <button class="btn-back">
+        <button class="btn-back"@onclick="HandleVolver">
             <span class="icon-arrow">←</span> Volver
         </button>
         <div class="breadcrumbs">
@@ -325,4 +326,5 @@ input:checked + .slider:before {
             Mensaje = "Votación creada correctamente.";
         } catch { Mensaje = "Error al crear la votación."; }
     }
+    private void HandleVolver() => Nav.NavigateTo("/");
 }

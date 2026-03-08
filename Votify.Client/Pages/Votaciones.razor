@@ -1,0 +1,106 @@
+@page "/"
+@using Votify.Application.DTOs
+@using Votify.Domain.Entities
+@inject Votify.Client.Services.VotacionesService VotacionesService
+@inject NavigationManager Nav
+
+<div class="main-container">
+    <div class="header-principal">
+        <div class="logo-container">
+            <div class="logo-icon small">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 13V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M3 13H21L19 7H5L3 13Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M9 13L11 15L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <span class="brand-name">Votify</span>
+        </div>
+        
+        <button class="btn-crear" @onclick="IrACrearVotacion">
+            <span>+</span> Nueva Votación
+        </button>
+    </div>
+
+    <div class="content-wrapper">
+        <h2 class="section-title">Votaciones Activas</h2>
+        
+        @if (listaVotaciones == null)
+        {
+            <div class="loader-container">
+                <div class="spinner"></div>
+                <p>Cargando...</p>
+            </div>
+        }
+        else if (listaVotaciones.Cast<object>().Count() == 0)
+        {
+            <div class="empty-state">
+                <p>No hay votaciones disponibles.</p>
+                <button class="btn-ver" @onclick="IrACrearVotacion">Crear nueva</button>
+            </div>
+        }
+        else
+        {
+            <div class="votaciones-grid">
+                @foreach (Votacion v in listaVotaciones)
+                {
+                    <div class="votacion-card">
+                        <div class="card-badge">@v.Tipo</div>
+                        <h3>@v.Nombre</h3>
+                        <p class="fecha">Finaliza: @v.FechaFin.ToString("dd/MM/yyyy")</p>
+                        
+                        <div class="card-footer">
+                            <span class="stats">@v.LimiteProyectos Proyectos</span>
+                            <button class="btn-ver">Gestionar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .main-container { background-color: #f8f9fc; min-height: 100vh; padding: 1.5rem; font-family: 'Inter', sans-serif; }
+    .content-wrapper { max-width: 1000px; margin: 0 auto; }
+    .header-principal { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto 2rem; }
+    .brand-name { font-weight: 800; font-size: 1.2rem; color: #4c1d95; letter-spacing: -0.02em; }
+    .logo-icon.small { width: 32px; height: 32px; background: #f3e8ff; color: #9333ea; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .logo-icon svg { width: 18px; }
+    .btn-crear { background: #9333ea; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
+    .btn-crear:hover { background: #7e22ce; transform: translateY(-1px); }
+    .section-title { color: #1e293b; font-size: 1.3rem; font-weight: 800; margin-bottom: 1.5rem; }
+    .votaciones-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .votacion-card { background: white; padding: 1.5rem; border-radius: 30px; border: 1px solid #f1f5f9; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: 0.3s; }
+    .votacion-card:hover { border-color: #ddd6fe; box-shadow: 0 10px 20px rgba(147, 51, 234, 0.08); }
+    .card-badge { background: #f3e8ff; color: #9333ea; font-size: 0.7rem; font-weight: 800; padding: 0.3rem 0.7rem; border-radius: 10px; display: inline-block; margin-bottom: 1rem; text-transform: uppercase; }
+    .votacion-card h3 { margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1.1rem; font-weight: 700; }
+    .fecha { color: #64748b; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f8fafc; padding-top: 1rem; }
+    .stats { font-size: 0.75rem; color: #94a3b8; font-weight: 600; }
+    .btn-ver { background: white; border: 1px solid #e2e8f0; color: #7c3aed; padding: 0.4rem 0.8rem; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+    .loader-container { text-align: center; padding: 4rem; color: #64748b; }
+    .spinner { width: 35px; height: 35px; border: 4px solid #f3e8ff; border-top: 4px solid #9333ea; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
+    .empty-state { text-align: center; padding: 3rem; background: white; border-radius: 30px; border: 2px dashed #e2e8f0; }
+</style>
+
+@code {
+  
+    private System.Collections.IEnumerable? listaVotaciones;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try 
+        {
+
+            listaVotaciones = await VotacionesService.ObtenerVotaciones();
+        }
+        catch (Exception)
+        {
+            listaVotaciones = new List<object>();
+        }
+    }
+
+    private void IrACrearVotacion() => Nav.NavigateTo("/nueva-votacion");
+    private void Gestionar(string id) => Nav.NavigateTo($"/votacion/{id}");
+}
