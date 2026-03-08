@@ -1,56 +1,306 @@
-@page "/crear-votacion"
+@page "/"
 @using Votify.Client.DTOs
-
 @inject VotacionesService VotacionesService
 
-<h2 class="title">Configuración de la nueva votación</h2>
-
-<p class="subtitle">Define los parámetros para el nuevo proceso de votación.</p>
-
-<div class="form-container">
-
-    <div class="form-group">
-        <label>Título de la votación</label>
-        <input class="form-control" @bind="Nombre" placeholder="Ej: Votación Final" />
+<div class="main-container">
+    <div class="top-nav">
+        <button class="btn-back">
+            <span class="icon-arrow">←</span> Volver
+        </button>
+        <div class="breadcrumbs">
+            <span>Evento A</span> <span class="separator">></span> <span class="current-page">Nueva Votación</span>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label>Tipo de votación</label>
-        <select class="form-control" @bind="Tipo">
-            <option value="ESTANDAR">Recuento de votos</option>
-            <option value="ANONIMA">Votación anónima</option>
-        </select>
+    <div class="card">
+        <h2 class="title">Configuración de la nueva votación</h2>
+        <p class="subtitle">Define los parámetros para el nuevo proceso de votación.</p>
+
+        <div class="form-body">
+            <div class="form-group">
+                <label>Título de la votación</label>
+                <input type="text" class="form-control" @bind="Nombre" placeholder="Votación Final" />
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de votación</label>
+                <div class="select-wrapper">
+                    <select class="form-control select-custom" @bind="Tipo">
+                        <option value="ESTANDAR">Recuento de votos</option>
+                        <option value="ANONIMA">Votación anónima</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="grid-dates">
+                <div class="form-group">
+                    <label>Inicio del periodo</label>
+                    <input type="datetime-local" class="form-control" @bind="FechaInicio" />
+                </div>
+                <div class="form-group">
+                    <label>Fin del periodo</label>
+                    <input type="datetime-local" class="form-control" @bind="FechaFin" />
+                </div>
+            </div>
+
+            <h4 class="section-divider">Opciones adicionales</h4>
+
+
+            <div class="option-row">
+                <div class="option-info">
+                    <p class="option-title">Permitir comentarios de feedback</p>
+                    <p class="option-desc">Los votantes podrán dejar una breve reseña al votar</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" @bind="PermiteComentarios">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+
+            <div class="option-row">
+                <div class="option-info">
+                    <p class="option-title">Límite de proyectos por votar</p>
+                    <p class="option-desc">Máximo número de proyectos que un usuario puede seleccionar</p>
+                </div>
+                <input type="number" class="limit-input" @bind="LimiteProyectos" min="1" />
+            </div>
+
+
+            <button class="btn-submit" @onclick="HandleCrearVotacion">Crear Votación</button>
+
+            @if (!string.IsNullOrEmpty(Mensaje))
+            {
+                <div class="alert @(Mensaje.Contains("Error") ? "alert-error" : "alert-success")">
+                    @Mensaje
+                </div>
+            }
+        </div>
     </div>
-
-    <div class="form-group">
-        <label>Inicio del período</label>
-        <input type="datetime-local" class="form-control" @bind="FechaInicio" />
-    </div>
-
-    <div class="form-group">
-        <label>Fin del período</label>
-        <input type="datetime-local" class="form-control" @bind="FechaFin" />
-    </div>
-
-    <h4 class="section-title">Opciones adicionales</h4>
-
-    <div class="form-group checkbox-group">
-        <input type="checkbox" @bind="PermiteComentarios" />
-        <label>Permitir comentarios de feedback</label>
-    </div>
-
-    <div class="form-group">
-        <label>Límite de proyectos por votar</label>
-        <input type="number" class="form-control" @bind="LimiteProyectos" min="1" />
-    </div>
-
-    <button class="btn btn-primary" @onclick="HandleCrearVotacion">Crear Votación</button>
-
-    @if (Mensaje != null)
-    {
-        <p class="mensaje">@Mensaje</p>
-    }
 </div>
+<style>
+.main-container {
+    background-color: #f8f9fc;
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+
+.top-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-back {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    color: #6b21a8;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-back:hover {
+    background: #f1f5f9;
+}
+
+.breadcrumbs {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.current-page {
+    color: #6b21a8;
+    font-weight: 700;
+}
+
+
+.card {
+    background: white;
+    max-width: 750px;
+    margin: 0 auto;
+    border-radius: 45px; 
+    padding: 3.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+}
+
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    font-size: 1rem;
+    color: #1e293b;
+    background-color: #ffffff;
+    transition: all 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #a855f7;
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+
+.grid-dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+
+.section-divider {
+    color: #7e22ce;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin: 2.5rem 0 1.2rem 0;
+}
+
+
+.option-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    padding: 1.2rem 1.5rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    border: 1px solid #f1f5f9;
+}
+
+.option-title {
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.option-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 2px 0 0 0;
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 28px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #e2e8f0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+input:checked + .slider {
+    background-color: #9333ea; 
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+
+.limit-input {
+    width: 70px;
+    padding: 0.6rem;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+
+.btn-submit {
+    width: 100%;
+    background-color: #a855f7;
+    background: linear-gradient(to right, #a855f7, #9333ea);
+    color: white;
+    border: none;
+    padding: 1.2rem;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: transform 0.1s, opacity 0.2s;
+    margin-bottom: 1.5rem;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+}
+
+.btn-submit:active {
+    transform: scale(0.99);
+}
+</style>
 
 @code {
     string Nombre = "";
@@ -59,29 +309,20 @@
     DateTime FechaFin = DateTime.Now.AddDays(1);
     int LimiteProyectos = 1;
     bool PermiteComentarios = true;
-
     string? Mensaje;
 
     async Task HandleCrearVotacion()
     {
-        CrearVotacionRequest?  request = new CrearVotacionRequest
-        {
-            Nombre = Nombre,
-            Tipo = Tipo,
-            FechaInicio = FechaInicio,
-            FechaFin = FechaFin,
-            LimiteProyectos = LimiteProyectos,
-            PermiteComentarios = PermiteComentarios
-        };
-
-        try
-        {
+       
+        try {
+            CrearVotacionRequest? request = new CrearVotacionRequest {
+                Nombre = Nombre, Tipo = Tipo, 
+                FechaInicio = FechaInicio.ToUniversalTime(), 
+                FechaFin = FechaFin.ToUniversalTime(),
+                LimiteProyectos = LimiteProyectos, PermiteComentarios = PermiteComentarios
+            };
             await VotacionesService.CrearVotacion(request);
             Mensaje = "Votación creada correctamente.";
-        }
-        catch
-        {
-            Mensaje = "Error al crear la votación.";
-        }
+        } catch { Mensaje = "Error al crear la votación."; }
     }
 }

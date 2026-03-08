@@ -1,12 +1,19 @@
 ﻿@inherits LayoutComponentBase
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        <div class="brand-header">
+            <div class="logo-container">
+                <div class="logo-icon">
+
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 13V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M3 13H21L19 7H5L3 13Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M10 3L14 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M9 13L11 15L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <span class="brand-name">Votify</span>
+            </div>
         </div>
 
         <article class="content px-4">
@@ -14,3 +21,41 @@
         </article>
     </main>
 </div>
+<style>
+    .brand-header {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0;
+    margin-bottom: 0.5px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.logo-icon {
+    background-color: #f3e8ff; 
+    color: #9333ea;            
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.logo-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.brand-name {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #4c1d95; 
+    letter-spacing: -0.03em;
+    font-family: 'Inter', sans-serif;
+}
+</style>
