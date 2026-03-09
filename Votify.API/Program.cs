@@ -1,9 +1,10 @@
 using DotNetEnv;
 using Votify.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Votify.Application.Interface;
+using Votify.Application.Interfaces;
 using Votify.Application.Services;
 using Votify.Infrastructure.Repositories;
+using Votify.Domain.Interfaces;
 
 static string? FindEnvFile()
 {
@@ -40,12 +41,13 @@ builder.Services.AddDbContext<VotifyDbContext>(options =>
 {
     options.UseNpgsql(connectionString, o =>
         o.EnableRetryOnFailure());
-        options.EnableSensitiveDataLogging();
+    options.EnableSensitiveDataLogging();
     options.LogTo(Console.WriteLine);    
-        
-    });
+});
 
+builder.Services.AddScoped<IVotacionRepository, VotacionRepository>();
 builder.Services.AddScoped<IVotacionService, VotacionService>();
+
 Console.WriteLine($"DB => {host}:{port}/{db} USER => {user}");
 
 builder.Services.AddControllers();
@@ -60,14 +62,11 @@ builder.Services.AddCors(options =>
                   .AllowAnyHeader();
         });
 });
-builder.Services.AddScoped<VotacionRepository>();
 
 var app = builder.Build();
 
 app.UseCors("AllowBlazor");
-
 app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.Run();

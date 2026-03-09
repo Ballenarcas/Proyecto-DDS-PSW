@@ -24,8 +24,8 @@ namespace Votify.Client.Services
         }
         public async Task<List<CrearVotacionResponse>> ObtenerVotaciones()
         {
-            return await _http.GetFromJsonAsync<List<CrearVotacionResponse>>("api/votaciones") 
-                ?? new List<CrearVotacionResponse>();
+            var resultado = await _http.GetFromJsonAsync<List<CrearVotacionResponse>>("api/votaciones");
+            return resultado ?? new List<CrearVotacionResponse>();
         }
     }
 }

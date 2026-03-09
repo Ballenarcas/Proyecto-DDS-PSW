@@ -1,15 +1,15 @@
 using Votify.Application.DTOs;
-using Votify.Application.Interface;
+using Votify.Application.Interfaces;
 using Votify.Domain.Factory;
-using Votify.Infrastructure.Repositories;
+using Votify.Domain.Interfaces;
 
 namespace Votify.Application.Services
 {
     public class VotacionService : IVotacionService
     {
-        private readonly VotacionRepository _repo;
+        private readonly IVotacionRepository _repo;
 
-        public VotacionService(VotacionRepository repo)
+        public VotacionService(IVotacionRepository repo)
         {
             _repo = repo;
         }
@@ -37,14 +37,15 @@ namespace Votify.Application.Services
         {
             var entidades = await _repo.ObtenerTodasAsync();
 
-            // Mapeamos de la base de datos al DTO que verá el cliente
             return entidades.Select(e => new CrearVotacionResponse
             {
                 Id = e.Id.ToString(), 
                 Nombre = e.Nombre,
-                Tipo = e.Tipo,
+                Tipo = e.Tipo(),
                 FechaInicio = e.FechaInicio,
-                FechaFin = e.FechaFin
+                FechaFin = e.FechaFin,
+                LimiteProyectos = e.LimiteProyectos,
+                PermiteComentarios = e.PermiteComentarios
             }).ToList();
         }
     }

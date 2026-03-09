@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Votify.API.DTOs;
 using Votify.Application.DTOs;
-using Votify.Application.Interface;
+using Votify.Application.Interfaces;
 
 namespace Votify.API.Controllers
 {
@@ -40,6 +40,12 @@ namespace Votify.API.Controllers
                 dto.LimiteProyectos,
                 dto.PermiteComentarios
             });
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<CrearVotacionResponse>>> Get()
+        {
+            var votaciones = await _service.ObtenerTodasAsync();
+            return Ok(votaciones);
         }
     }
 }

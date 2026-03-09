@@ -1,11 +1,13 @@
 using Votify.Domain.Entities;
+using Votify.Domain.Interfaces;
+using Votify.Domain.Factory;
 using Votify.Infrastructure.Persistence;
 using Votify.Infrastructure.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Votify.Infrastructure.Repositories
 {
-    public class VotacionRepository
+    public class VotacionRepository : IVotacionRepository
     {
         private readonly VotifyDbContext _db;
 
@@ -18,6 +20,7 @@ namespace Votify.Infrastructure.Repositories
         {
             var entity = new VotacionEntity
             {
+                Id = votacion.Id,
                 Nombre = votacion.Nombre,
                 Tipo = votacion.Tipo(),
                 FechaInicio = votacion.FechaInicio.ToUniversalTime(),
@@ -25,16 +28,43 @@ namespace Votify.Infrastructure.Repositories
                 LimiteProyectos = votacion.LimiteProyectos,
                 PermiteComentarios = votacion.PermiteComentarios
             };
-            Console.WriteLine("Añadiendo votacion...");
 
             await _db.Votaciones.AddAsync(entity);
-            Console.WriteLine("Guardando en DB...");
             await _db.SaveChangesAsync();
-            Console.WriteLine("Guardado!");
-        }   
-        public async Task<List<VotacionEntity>> ObtenerTodasAsync()
+        }
+
+        public async Task<Votacion?> ObtenerAsync(string id)
         {
-            return await _db.Votaciones.ToListAsync();
+            if (!Guid.TryParse(id, out var guid)) return null;
+            
+            var entity = await _db.Votaciones.FindAsync(guid);
+            return entity == null ? null : MapToDomain(entity);
+        }
+
+        public async Task<List<Votacion>> ObtenerTodasAsync()
+        {
+            var entities = await _db.Votaciones.ToListAsync();
+            return entities.Select(MapToDomain).ToList();
+        }
+
+        private Votacion MapToDomain(VotacionEntity entity)
+        {
+            VotacionFactory factory = entity.Tipo.ToUpper() switch
+            {
+                "ESTANDAR" => new VotacionEstandarFactory(),
+                "ANONIMA" => new VotacionAnonimaFactory(),
+                _ => throw new Exception("Tipo desconocido")
+            };
+
+            var domain = factory.Crear(
+                entity.Nombre,
+                entity.FechaInicio,
+                entity.FechaFin,
+                entity.LimiteProyectos,
+                entity.PermiteComentarios
+            );
+            domain.Id = entity.Id;
+            return domain;
         }
     }
 }

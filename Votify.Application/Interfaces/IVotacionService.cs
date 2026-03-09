@@ -1,6 +1,6 @@
 using Votify.Application.DTOs;
 
-namespace Votify.Application.Interface
+namespace Votify.Application.Interfaces
 {
     public interface IVotacionService
     {

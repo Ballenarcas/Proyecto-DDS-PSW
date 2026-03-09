@@ -1,6 +1,5 @@
 @page "/"
-@using Votify.Application.DTOs
-@using Votify.Domain.Entities
+@using Votify.Client.DTOs
 @inject Votify.Client.Services.VotacionesService VotacionesService
 @inject NavigationManager Nav
 
@@ -32,7 +31,7 @@
                 <p>Cargando...</p>
             </div>
         }
-        else if (listaVotaciones.Cast<object>().Count() == 0)
+        else if (!listaVotaciones.Any())
         {
             <div class="empty-state">
                 <p>No hay votaciones disponibles.</p>
@@ -42,7 +41,7 @@
         else
         {
             <div class="votaciones-grid">
-                @foreach (Votacion v in listaVotaciones)
+                @foreach (var v in listaVotaciones)
                 {
                     <div class="votacion-card">
                         <div class="card-badge">@v.Tipo</div>
@@ -51,7 +50,7 @@
                         
                         <div class="card-footer">
                             <span class="stats">@v.LimiteProyectos Proyectos</span>
-                            <button class="btn-ver">Gestionar</button>
+                            <button class="btn-ver" @onclick="() => Gestionar(v.Id)">Gestionar</button>
                         </div>
                     </div>
                 }
@@ -85,19 +84,18 @@
 </style>
 
 @code {
-  
-    private System.Collections.IEnumerable? listaVotaciones;
+    private List<CrearVotacionResponse>? listaVotaciones;
 
     protected override async Task OnInitializedAsync()
     {
         try 
         {
-
             listaVotaciones = await VotacionesService.ObtenerVotaciones();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            listaVotaciones = new List<object>();
+            Console.WriteLine($"Error cargando votaciones: {ex.Message}");
+            listaVotaciones = new List<CrearVotacionResponse>();
         }
     }
 

@@ -1,6 +1,6 @@
 using Votify.Domain.Entities;
 
-namespace Votify.Application.Repositories
+namespace Votify.Domain.Interfaces
 {
     public interface IVotoRepository
     {

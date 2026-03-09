@@ -1,4 +1,4 @@
-namespace Votify.Application.Repositories
+namespace Votify.Domain.Interfaces
 {
     public interface IComentarioRepository
     {
