@@ -16,6 +16,10 @@ namespace Votify.Application.Services
 
         public async Task CrearVotacionAsync(CrearVotacionDto dto)
         {
+            if (dto.FechaInicio >= dto.FechaFin)
+            {
+                throw new ArgumentException("La fecha de inicio debe ser menor a la fecha de fin.");
+            }
             VotacionFactory factory = dto.Tipo.ToUpper() switch
             {
                 "ESTANDAR" => new VotacionEstandarFactory(),

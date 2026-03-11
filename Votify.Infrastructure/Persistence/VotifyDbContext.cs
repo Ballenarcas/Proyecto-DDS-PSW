@@ -14,7 +14,7 @@ public class VotifyDbContext : DbContext
     {
         modelBuilder.Entity<VotacionEntity>(entity =>
         {
-            entity.ToTable("votacion"); // tabla exacta en Supabase
+            entity.ToTable("votacion"); 
 
             entity.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
             entity.Property(e => e.Nombre).HasColumnName("nombre");
