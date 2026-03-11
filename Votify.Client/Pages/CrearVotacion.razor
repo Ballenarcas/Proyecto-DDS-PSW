@@ -324,6 +324,11 @@ input:checked + .slider:before {
             };
             await VotacionesService.CrearVotacion(request);
             Mensaje = "Votación creada correctamente.";
+            
+            StateHasChanged();
+            await Task.Delay(1000); 
+            
+            Nav.NavigateTo("/");
         } catch { Mensaje = "Error al crear la votación."; }
     }
     private void HandleVolver() => Nav.NavigateTo("/");
