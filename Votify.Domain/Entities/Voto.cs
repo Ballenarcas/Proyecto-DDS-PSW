@@ -4,12 +4,10 @@ namespace Votify.Domain.Entities
     {
         public string ProyectoId { get; }
         public string? VotanteId { get; }
-        public int Valor { get; }
 
-        protected Voto(string proyectoId, int valor, string? votanteId)
+        protected Voto(string proyectoId, string? votanteId)
         {
             ProyectoId = proyectoId;
-            Valor = valor;
             VotanteId = votanteId;
         }
 

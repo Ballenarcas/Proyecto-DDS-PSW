@@ -47,6 +47,8 @@ builder.Services.AddDbContext<VotifyDbContext>(options =>
 
 builder.Services.AddScoped<IVotacionRepository, VotacionRepository>();
 builder.Services.AddScoped<IVotacionService, VotacionService>();
+builder.Services.AddScoped<IProyectoRepository, ProyectoRepository>();
+builder.Services.AddScoped<IProyectoService, ProyectoService>();
 
 Console.WriteLine($"DB => {host}:{port}/{db} USER => {user}");
 

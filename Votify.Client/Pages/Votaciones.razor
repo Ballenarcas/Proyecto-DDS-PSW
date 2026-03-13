@@ -72,7 +72,7 @@
                         <h3>@v.Nombre</h3>
                         <p class="fecha">Finaliza: @v.FechaFin.ToString("dd/MM/yyyy")</p>
                         
-                        <button class="btn-votar">
+                        <button class="btn-votar" @onclick="() => Votar(v.Id)">
                             Acceder a votar
                         </button>
 
@@ -170,4 +170,6 @@
 
     private void IrACrearVotacion() => Nav.NavigateTo("/nueva-votacion");
     private void Gestionar(string id) => Nav.NavigateTo($"/votacion/{id}");
+
+    private void Votar(string id) => Nav.NavigateTo($"/proyectos/");
 }

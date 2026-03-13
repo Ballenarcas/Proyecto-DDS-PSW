@@ -7,5 +7,5 @@ namespace Votify.Domain.Interfaces
         Task GuardarAsync(Votacion votacion);
         Task<Votacion?> ObtenerAsync(string id);
         Task<List<Votacion>> ObtenerTodasAsync();
-    }
+    }   
 }

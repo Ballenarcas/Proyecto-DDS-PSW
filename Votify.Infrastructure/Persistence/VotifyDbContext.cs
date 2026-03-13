@@ -25,5 +25,8 @@ public class VotifyDbContext : DbContext
             entity.Property(e => e.PermiteComentarios).HasColumnName("comentarios");
         });
     }
+
+    public DbSet<ProyectoEntity> Proyectos { get; set; }
+
 }
 }
