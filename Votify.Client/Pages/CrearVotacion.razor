@@ -9,7 +9,7 @@
             <span class="icon-arrow">←</span> Volver
         </button>
         <div class="breadcrumbs">
-            <span>Evento A</span> <span class="separator">></span> <span class="current-page">Nueva Votación</span>
+            <a href="/" class="breadcrumb-link">Evento A</a> <span class="separator">></span> <span class="current-page">Nueva Votación</span>
         </div>
     </div>
 
@@ -300,6 +300,17 @@ input:checked + .slider:before {
 
 .btn-submit:active {
     transform: scale(0.99);
+    opacity: 0.5;
+
+}
+.breadcrumbs .breadcrumb-link {
+    color: #aa7ad7;
+    font-weight: 700;
+    text-decoration: none;
+}
+.breadcrumb-link:hover {
+    color: #6b21a8;
+    text-decoration: underline;
 }
 </style>
 
@@ -314,7 +325,11 @@ input:checked + .slider:before {
 
     async Task HandleCrearVotacion()
     {
-       
+       if (string.IsNullOrWhiteSpace(Nombre))
+        {
+            Mensaje = "El título de la votación es obligatorio.";
+            return;
+        }
         try {
             CrearVotacionRequest? request = new CrearVotacionRequest {
                 Nombre = Nombre, Tipo = Tipo, 
@@ -326,7 +341,7 @@ input:checked + .slider:before {
             Mensaje = "Votación creada correctamente.";
             
             StateHasChanged();
-            await Task.Delay(1000); 
+            await Task.Delay(400); 
             
             Nav.NavigateTo("/");
         } catch { Mensaje = "Error al crear la votación."; }
